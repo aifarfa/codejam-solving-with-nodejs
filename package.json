@@ -1,0 +1,23 @@
+{
+  "name": "tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/ --compilers js:babel-core/register",
+    "build": "babel --presets latest -d dist/ src/"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "pasit.r",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-preset-latest": "^6.16.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
