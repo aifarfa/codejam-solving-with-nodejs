@@ -4,9 +4,7 @@ import * as io from '../src/utils/io.js'
 import t9, {convert, convertLine, convertMulti} from '../src/spelling/t9.js'
 
 describe('t9-spelling', () => {
-
   describe('single line', () => {
-
     it('spell "hi"', () => {
       expect(convertLine('hi')).to.eq('44 444')
     })
@@ -30,8 +28,7 @@ describe('t9-spelling', () => {
   })
 
   describe('convert multiline', () => {
-
-    before(function() {
+    before(function () {
       const input = `4
 hi
 yes
@@ -41,54 +38,50 @@ hello world`
       this.result = convertMulti(input)
     })
 
-    it('skip first and empty line', function() {
+    it('skip first and empty line', function () {
       expect(this.result).to.have.length(4)
     })
 
-    it('convert each line', function() {
+    it('convert each line', function () {
       expect(this.result[0]).to.eq('44 444')
     })
 
-    it('convert last line', function() {
+    it('convert last line', function () {
       expect(this.result[3]).to.eq('4433555 555666096667775553')
     })
   })
 
   describe('convert', () => {
-
-    before(function() {
+    before(function () {
       this.result = convert(`2\n hi\nyes`)
     })
 
-    it('returns single string', function() {
+    it('returns single string', function () {
       expect(this.result).to.be.a('String')
     })
 
-    it('format each line', function() {
+    it('format each line', function () {
       expect(this.result).to.eq('Case #1: 044 444\nCase #2: 999337777')
     })
-
   })
 
   describe('default', () => {
-
-    before(function() {
+    before(function () {
       this.writeFile = td.replace(io, 'writeFile')
       const readAsString = td.replace(io, 'readAsString')
       const input = `2\nfoo  bar\nboo`
       td.when(readAsString('input.file')).thenReturn(Promise.resolve(input))
     })
 
-    afterEach(function() {
+    afterEach(function () {
       td.reset()
     })
 
-    it('calls readAsString', function(){
+    it('calls readAsString', function () {
       return t9('input.file').then(() => {
         // console.log(td.explain(this.writeFile).description)
         td.verify(this.writeFile('Case #1: 333666 6660 022 2777\nCase #2: 22666 666'))
       })
     })
-
   })
 })

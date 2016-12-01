@@ -4,13 +4,12 @@ import * as io from '../src/utils/io.js'
 import reverseWords, {reverse, reverseLine, formatOutput} from '../src/reverse-words/reverse-words.js'
 
 describe('reverse words', () => {
-
-  beforeEach(function(){
+  beforeEach(function () {
     let eol = td.replace(io, 'endOfLine')
     td.when(eol()).thenReturn('\n')
   })
 
-  afterEach(function(){
+  afterEach(function () {
     td.reset()
   })
 
@@ -64,5 +63,4 @@ describe('reverse words', () => {
       td.verify(writeFile(`Case #1: test a is this\nCase #2: foobar\nCase #3: base your all`))
     })
   })
-
 })
